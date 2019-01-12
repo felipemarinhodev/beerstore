@@ -1,0 +1,17 @@
+---
+- name: Ensure Docker is intalled
+  hosts: all
+  remote_user: ec2-user
+#  não precisa recuperar informações do ambiente, serão fornecidas as informações necessárias
+  gather_facts: false
+#  é para virar o super usuario antes?
+  become: true
+  tasks:
+    - name: Install Docker
+      yum: name=docker
+
+    - name: Ensure docker service is started
+      service:
+        name: docker
+        state: started
+        enable: yes
